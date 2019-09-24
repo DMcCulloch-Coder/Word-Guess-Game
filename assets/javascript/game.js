@@ -7,33 +7,32 @@ let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','
 
 let wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
 
-/*let word = {
+let word = {
     generate: wordBank [Math.floor(Math.random()*wordBank.length)],
     
 
 
-}*/
-let word = wordBank [Math.floor(Math.random()*wordBank.length)];
+}
 
 
 
 document.onkeyup = function(event) {
+
     let keyPress = String.fromCharCode(event.keyCode).toLowerCase();
     if (letters.indexOf(keyPress) > -1) {
         console.log(keyPress); //test
         console.log(word.generate); //test
 
-        //test to compare to key pressed to see if it is in the word
-        if (word.includes(keyPress) > -1) {
-            console.log('yes')
+        if (word.generate.includes(keyPress)) {
+            console.log('yes') //test
         } else {
-            console.log('no')
-        }
+            console.log('no') //test
+        };
 
 
     } else {
-        alert('Invalid Input')
-    }
+        alert('Invalid Input');
+    };
 }
 
 
