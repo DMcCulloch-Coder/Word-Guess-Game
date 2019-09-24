@@ -13,18 +13,19 @@ let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','
 let wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
 
 let word = {
-
-
+    generate: wordBank [Math.floor(Math.random()*wordBank.length)],
+    
 
 
 }
 
 
+
 document.onkeyup = function(event) {
     let keyPress = String.fromCharCode(event.keyCode).toLowerCase();
     if (letters.indexOf(keyPress) > 1) {
-        console.log(keyPress);
-
+        console.log(keyPress); //tester
+        console.log(word.generate); //tester
 
 
     } else {
