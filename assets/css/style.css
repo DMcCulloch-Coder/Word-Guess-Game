@@ -1,8 +1,33 @@
 body {
     background-color: blanchedalmond;
-    
+    background-image: url(../images/pokemon-bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+
 }
 
 .gameName {
     text-align: center;
+}
+
+.header {
+    background: black;
+    opacity: .8;
+    color: blanchedalmond;
+    width: 200px;
+    margin: 30px auto;
+    padding: 10px 30px;
+    
+
+}
+
+.container {
+  
+    background: black;
+    opacity: .8;
+    color: blanchedalmond;
+    width: 200px;
+    margin: 30px;
+    padding: 10px 30px;
+
 }
