@@ -1,6 +1,10 @@
 let wins = 0; //test
 let guessesRemaining = 10; //test
-let lettersGuessed = []; //test
+let correctLetters = []; //fix - need a bank of only correct letters.  
+//banks need to be cleared and word reset after win
+//word needs to be generated and blanks displayed before guessing
+let incorrectLetters = []; //fix
+let lettersGuessed = correctLetters + incorrectLetters; //test
 let currentWord = 'start';
 
 let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -19,7 +23,7 @@ let word = {
 
         for (let i=0; i < currentGuess.length; i++){
             
-            if(currentGuess[i].toLowerCase() === x || lettersGuessed.indexOf(word.generate[i]) > -1 ) {
+            if(currentGuess[i].toLowerCase() === x || correctLetters.indexOf(word.generate[i]) > -1 ) {
                 currentWordVisual = currentWordVisual + currentGuess[i] + ' ';
                 
             } else {
@@ -29,7 +33,7 @@ let word = {
         }
 
         this.delete(x);
-        lettersGuessed.push(x);
+        correctLetters.push(x);
         currentWord = currentWordVisual;
         
         console.log(currentWordVisual); //test
@@ -65,7 +69,7 @@ document.onkeyup = function(event) {
     document.getElementById('wins').innerHTML= wins;
     document.getElementById('currentWord').innerHTML = currentWord;
     document.getElementById('guessesRemaining').innerHTML= guessesRemaining;
-    document.getElementById('lettersGuessed').innerHTML = lettersGuessed;
+    document.getElementById('lettersGuessed').innerHTML = correctLetters + incorrectLetters;
 }
 
 
