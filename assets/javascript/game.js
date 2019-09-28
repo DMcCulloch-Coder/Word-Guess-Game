@@ -1,7 +1,7 @@
 let wins = 0; //test
-let currentWord = 'none'; //test
 let guessesRemaining = 10; //test
-let lettersGuessed = ['apple', 'grape', 'pear'] //test
+let lettersGuessed = ['apple', 'grape', 'pear']; //test
+let currentWordVisual = 'start';
 
 let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
@@ -10,6 +10,20 @@ let wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vul
 
 let word = {
     generate: wordBank [Math.floor(Math.random()*wordBank.length)],
+    exchange: function(letter, x) {
+        for (let i=0; i < letter.length; i++){
+            
+            for (let j=0; j < letter[i].length; j++){
+                if(letter[i][j].toLowerCase() === x) {
+                    currentWordVisual = currentWordVisual + letter[i][j] + ' ';
+                } else {
+                    currentWordVisual = currentWordVisual + '_ ';
+                }
+            }
+        }
+    
+    }
+    
 
 }
 
@@ -21,11 +35,10 @@ document.onkeyup = function(event) {
     if (letters.indexOf(keyPress) > -1) {
         console.log(keyPress); //test
         console.log(word.generate); //test
-        //wordArray is now an array of the generated word.
-        let wordArray = word.generate.split(""); 
-        console.log(wordArray)
 
         if (word.generate.includes(keyPress)) {
+            word.exchange(word.generate,keyPress);
+            
             console.log('yes') //test
             
         } else {
@@ -42,10 +55,7 @@ document.onkeyup = function(event) {
 
 
 document.getElementById('wins').innerHTML= wins;
-document.getElementById('currentWord').innerHTML = currentWord;
+document.getElementById('currentWord').innerHTML = currentWordVisual;
 document.getElementById('guessesRemaining').innerHTML= guessesRemaining;
-document.getElementById('lettersGuessed').innerHTML= lettersGuessed;
+document.getElementById('lettersGuessed').innerHTML = lettersGuessed;
 
-
-
-//add pokemon sound effects and music
