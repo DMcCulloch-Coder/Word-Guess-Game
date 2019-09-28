@@ -4,7 +4,7 @@ let correctLetters = []; //fix - need a bank of only correct letters.
 //banks need to be cleared and word reset after win
 //word needs to be generated and blanks displayed before guessing
 let incorrectLetters = []; //fix
-let lettersGuessed = correctLetters + incorrectLetters; //test
+let lettersGuessed = ''; //test
 let currentWord = 'start';
 
 let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -44,7 +44,6 @@ let word = {
 }
 
 
-
 document.onkeyup = function(event) {
 
     let keyPress = String.fromCharCode(event.keyCode).toLowerCase();
@@ -55,10 +54,11 @@ document.onkeyup = function(event) {
         if (word.generate.includes(keyPress)) {
             word.exchange(word.generate,keyPress);
             
-            console.log('yes') //test
             
         } else {
-            console.log('no') //test
+            word.delete(keyPress);
+            incorrectLetters.push(keyPress);
+            
         };
 
 
@@ -69,7 +69,7 @@ document.onkeyup = function(event) {
     document.getElementById('wins').innerHTML= wins;
     document.getElementById('currentWord').innerHTML = currentWord;
     document.getElementById('guessesRemaining').innerHTML= guessesRemaining;
-    document.getElementById('lettersGuessed').innerHTML = correctLetters + incorrectLetters;
+    document.getElementById('lettersGuessed').innerHTML = correctLetters + ',' + incorrectLetters;
 }
 
 
