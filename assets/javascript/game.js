@@ -1,7 +1,8 @@
 let wins = 0; //test
 let guessesRemaining = 15; //test
 let correctLetters = [];  
-//banks need to be cleared and word reset after win
+//change reset to generate a new word
+//recognize win condition
 //word needs to be generated and blanks displayed before guessing
 let incorrectLetters = []; //fix
 let lettersGuessed = ''; //test
@@ -11,32 +12,6 @@ let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 
 let wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix',
     'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
-
-function updateScore() {
-    document.getElementById('wins').innerHTML= wins;
-    document.getElementById('currentWord').innerHTML = currentWord;
-    document.getElementById('guessesRemaining').innerHTML= guessesRemaining;
-    document.getElementById('lettersGuessed').innerHTML = incorrectLetters;
-}
-
-function reset () {
-    guessesRemaining = 15;
-    correctLetters = [];
-    incorrectLetters = [];
-    let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    updateScore ();
-}
-
-function win () {
-    alert ('You Won!');
-    win++;
-    reset();
-}
-
-function lose () {
-    alert ('You lose!');
-    reset();
-}
 
 let word = {
     generate: wordBank [Math.floor(Math.random()*wordBank.length)],
@@ -66,17 +41,46 @@ let word = {
     
     }
     
-
 }
 
+function updateScore() {
+    document.getElementById('wins').innerHTML= wins;
+    document.getElementById('currentWord').innerHTML = currentWord;
+    document.getElementById('guessesRemaining').innerHTML= guessesRemaining;
+    document.getElementById('lettersGuessed').innerHTML = incorrectLetters;
+}
 
+function reset () {
+    guessesRemaining = 15;
+    correctLetters = [];
+    incorrectLetters = [];
+    let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    updateScore ();
+    //need this to reset the word!!!!!****************************************************8
+    word.generate = wordBank [Math.floor(Math.random()*wordBank.length)]
+}
+
+function win () {
+    alert ('You Won!');
+    win++;
+    reset();
+}
+
+function lose(){
+    alert ('You lose!');
+    reset();
+}
+
+//What happens when you press a key
 document.onkeyup = function(event) {
 
-    let keyPress = String.fromCharCode(event.keyCode).toLowerCase();
-    if (unguessedLetters.indexOf(keyPress) > -1) {
-        console.log(keyPress); //test
-        console.log(word.generate); //test
+    updateScore();
 
+    let keyPress = String.fromCharCode(event.keyCode).toLowerCase();
+    //if key is for unguessed letter
+    if (unguessedLetters.indexOf(keyPress) > -1) {
+        
+        //if that key is in the word
         if (word.generate.includes(keyPress)) {
             word.exchange(word.generate,keyPress);
             
@@ -84,10 +88,14 @@ document.onkeyup = function(event) {
         } else {
             word.delete(keyPress);
             incorrectLetters.push(keyPress);
+            guessesRemaining = guessesRemaining - 1;
+            if (guessesRemaining <= 0){
+                lose();
+            } 
             
         };
 
-
+        
     } else {
         alert('Invalid Input');
     };
