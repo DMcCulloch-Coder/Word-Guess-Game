@@ -47,11 +47,18 @@ function checkLose() {
     }
 }
 
-function checkWin () {
-    if(selectedWordVisual == arrayForSelectedWord) {
+function checkWin() {
+    console.log(JSON.stringify(selectedWordVisual))
+    console.log(JSON.stringify(arrayForSelectedWord))
+    
+
+    if(JSON.stringify(selectedWordVisual) == JSON.stringify(arrayForSelectedWord)) {
         alert ('You Won!')
+        wins++;
         displayValues();
         reset();
+    } else {
+        console.log('error')
     }
 }
 
@@ -78,7 +85,10 @@ document.onkeyup =  function(event) {
                     selectedWordVisual[i] = arrayForSelectedWord[i];
                     console.log(arrayForSelectedWord);
                     console.log(selectedWordVisual);
+                    
+                    checkWin();
                 }
+                
             }
 
             displayValues();
@@ -87,6 +97,7 @@ document.onkeyup =  function(event) {
             guessesRemaining--;
             checkLose ();
             displayValues();
+
         }
 
 
