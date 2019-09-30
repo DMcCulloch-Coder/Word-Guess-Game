@@ -57,7 +57,7 @@ function reset () {
     let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     updateScore ();
     //need this to reset the word!!!!!****************************************************8
-    word.generate = wordBank [Math.floor(Math.random()*wordBank.length)]
+    word.generate;
 }
 
 function win () {
@@ -89,7 +89,7 @@ document.onkeyup = function(event) {
             word.delete(keyPress);
             incorrectLetters.push(keyPress);
             guessesRemaining = guessesRemaining - 1;
-            if (guessesRemaining <= 0){
+            if (guessesRemaining == 0){
                 lose();
             } 
             
