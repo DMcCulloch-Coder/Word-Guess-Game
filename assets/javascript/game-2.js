@@ -48,8 +48,8 @@ function checkLose() {
 }
 
 function checkWin() {
-    console.log(JSON.stringify(selectedWordVisual))
-    console.log(JSON.stringify(arrayForSelectedWord))
+    console.log(JSON.stringify(selectedWordVisual)) //test
+    console.log(JSON.stringify(arrayForSelectedWord)) //test
     
 
     if(JSON.stringify(selectedWordVisual) == JSON.stringify(arrayForSelectedWord)) {
@@ -94,12 +94,13 @@ document.onkeyup =  function(event) {
             displayValues();
         } else {
             //if the key is a letter, but not in word
+            unguessedLetters.splice(unguessedLetters.indexOf(keyPress),1)
+            incorrectLetters.push(keyPress);
             guessesRemaining--;
             checkLose ();
             displayValues();
 
         }
-
 
 
     } else {
