@@ -15,9 +15,6 @@ function reset() {
     selectedWord = wordBank [Math.floor(Math.random()*wordBank.length)];
     arrayForSelectedWord = selectedWord.split('');
 
-    console.log (selectedWord) //test
-    console.log (arrayForSelectedWord) //test
-
     guessesRemaining = 10;
     incorrectLetters = [];
     selectedWordVisual = [];
@@ -28,7 +25,6 @@ function reset() {
         selectedWordVisual.push('_')
     }
 
-    console.log (selectedWordVisual) //test
 }
 
 function displayValues() {
@@ -47,10 +43,7 @@ function checkLose() {
     }
 }
 
-function checkWin() {
-    console.log(JSON.stringify(selectedWordVisual)) //test
-    console.log(JSON.stringify(arrayForSelectedWord)) //test
-    
+function checkWin() { 
 
     if(JSON.stringify(selectedWordVisual) == JSON.stringify(arrayForSelectedWord)) {
         alert ('You Won!')
@@ -58,7 +51,7 @@ function checkWin() {
         displayValues();
         reset();
     } else {
-        console.log('error')
+        
     }
 }
 
@@ -78,13 +71,11 @@ document.onkeyup =  function(event) {
         
         //if the key is in the word
         if(arrayForSelectedWord.indexOf(keyPress) > -1) {
-            console.log('correct letter') //test
+            
             for(i=0; i<arrayForSelectedWord.length; i++) {
                 //loop through array
                 if(arrayForSelectedWord[i] == keyPress) {
                     selectedWordVisual[i] = arrayForSelectedWord[i];
-                    console.log(arrayForSelectedWord);
-                    console.log(selectedWordVisual);
                     
                     checkWin();
                 }
@@ -101,7 +92,6 @@ document.onkeyup =  function(event) {
             displayValues();
 
         }
-
 
     } else {
         //if they keyed in a non-letter or a guessed letter
