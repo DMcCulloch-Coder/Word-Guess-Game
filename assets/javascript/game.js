@@ -13,8 +13,21 @@ let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 let wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix',
     'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
 
+let wordGenerate = '';
+
+function reset () {
+    wordGenerate = wordBank [Math.floor(Math.random()*wordBank.length)]
+    guessesRemaining = 15;
+    correctLetters = [];
+    incorrectLetters = [];
+    let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    updateScore ();
+    //need this to reset the word!!!!!****************************************************8
+    //word.generate;
+}
+
 let word = {
-    generate: wordBank [Math.floor(Math.random()*wordBank.length)],
+    //generate: wordBank [Math.floor(Math.random()*wordBank.length)], 
     delete: function(x) {
         unguessedLetters.splice(unguessedLetters.indexOf(x),1)
         },
@@ -24,7 +37,7 @@ let word = {
 
         for (let i=0; i < currentGuess.length; i++){
             
-            if(currentGuess[i].toLowerCase() === x || correctLetters.indexOf(word.generate[i]) > -1 ) {
+            if(currentGuess[i].toLowerCase() === x || correctLetters.indexOf(wordGenerate[i]) > -1 ) {
                 currentWordVisual = currentWordVisual + currentGuess[i] + ' ';
                 
             } else {
@@ -36,7 +49,11 @@ let word = {
         this.delete(x);
         correctLetters.push(x);
         currentWord = currentWordVisual;
-        
+
+        if(JSON.stringify(wordGenerate)  == JSON.stringify(currentWordVisual)) {
+            win();
+        }
+        console.log(wordGenerate) //test
         console.log(currentWordVisual); //test
     
     }
@@ -50,15 +67,7 @@ function updateScore() {
     document.getElementById('lettersGuessed').innerHTML = incorrectLetters;
 }
 
-function reset () {
-    guessesRemaining = 15;
-    correctLetters = [];
-    incorrectLetters = [];
-    let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    updateScore ();
-    //need this to reset the word!!!!!****************************************************8
-    word.generate;
-}
+
 
 function win () {
     alert ('You Won!');
@@ -72,6 +81,8 @@ function lose(){
 }
 
 //What happens when you press a key
+reset();
+
 document.onkeyup = function(event) {
 
     updateScore();
@@ -81,8 +92,8 @@ document.onkeyup = function(event) {
     if (unguessedLetters.indexOf(keyPress) > -1) {
         
         //if that key is in the word
-        if (word.generate.includes(keyPress)) {
-            word.exchange(word.generate,keyPress);
+        if (wordGenerate.includes(keyPress)) {
+            word.exchange(wordGenerate,keyPress);
             
             
         } else {
